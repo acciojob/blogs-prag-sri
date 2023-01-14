@@ -1,12 +1,10 @@
 package com.driver.services;
 
+import com.driver.RequestDTO.UserRequestDTO;
 import com.driver.models.*;
 import com.driver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserService {
@@ -37,6 +35,11 @@ public class UserService {
     }
 
     public User findUserByUsername(String username){
-        return userRepository3.findByUsername(username);
+        for(User user: userRepository3.findAll())
+        {
+            if(user.getUsername().equals(username))
+                return user;
+        }
+        return null;
     }
 }

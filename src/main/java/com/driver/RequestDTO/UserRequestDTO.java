@@ -1,4 +1,4 @@
-package com.driver.models;
+package com.driver.RequestDTO;
 
 public class UserRequestDTO {
     private String username;

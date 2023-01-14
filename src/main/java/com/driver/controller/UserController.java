@@ -1,7 +1,7 @@
 package com.driver.controller;
 
 import com.driver.models.User;
-import com.driver.models.UserRequestDTO;
+import com.driver.RequestDTO.UserRequestDTO;
 import com.driver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

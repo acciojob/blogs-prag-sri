@@ -1,8 +1,10 @@
 package com.driver.models;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -15,6 +17,8 @@ public class User {
     private String firstName;
 
     private String lastName;
+
+    private List<Blog> list_of_blogs;
 
     public User() {
     }
@@ -58,7 +62,15 @@ public class User {
         this.lastName = lastName;
     }
 
-    @OneToMany
+    public List<Blog> getList_of_blogs() {
+        return list_of_blogs;
+    }
+
+    public void setList_of_blogs(List<Blog> list_of_blogs) {
+        this.list_of_blogs = list_of_blogs;
+    }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Blog blog;
 
 }
