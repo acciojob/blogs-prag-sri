@@ -16,10 +16,20 @@ public class UserService {
     @Autowired
     BlogService blogService3;
 
-    public void createUser(User user){
+    @Autowired
+    UserRequestDTO userRequestDTO;
+
+    public void createUser(UserRequestDTO userRequestDTO){
+        User user= new User();
+        user.setUsername(userRequestDTO.getUsername());
+        user.setPassword(userRequestDTO.getPassword());
+        user.setFirstName(userRequestDTO.getFirstName());
+        user.setLastName(userRequestDTO.getLastName());
+        userRepository3.save(user);
     }
 
     public void deleteUser(int userId){
+        userRepository3.deleteById(userId);
     }
 
     public void updateUser(User user){

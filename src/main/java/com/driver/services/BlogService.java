@@ -26,12 +26,14 @@ public class BlogService {
 
     public List<Blog> showBlogs(){
         //find all blogs
-
+        List<Blog> list= new ArrayList<>();
+        list.add((Blog) blogRepository1.findAll());
+        return list;
     }
 
     public void createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
-
+        Blog blog= new Blog();
         //updating the blog details
 
         //Updating the userInformation and changing its blogs
@@ -40,6 +42,7 @@ public class BlogService {
 
     public Blog findBlogById(int blogId){
         //find a blog
+        return blogRepository1.findById(blogId).get();
     }
 
     public void addImage(Integer blogId, String description, String dimensions){
@@ -48,5 +51,6 @@ public class BlogService {
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
+        blogRepository1.deleteById(blogId);
     }
 }

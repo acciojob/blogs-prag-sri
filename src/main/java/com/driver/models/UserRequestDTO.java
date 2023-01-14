@@ -1,13 +1,6 @@
 package com.driver.models;
 
-import javax.persistence.*;
-
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-
+public class UserRequestDTO {
     private String username;
 
     private String password;
@@ -16,10 +9,10 @@ public class User {
 
     private String lastName;
 
-    public User() {
+    public UserRequestDTO() {
     }
 
-    public User(String username, String password, String firstName, String lastName) {
+    public UserRequestDTO(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -57,8 +50,4 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    @OneToMany
-    private Blog blog;
-
 }

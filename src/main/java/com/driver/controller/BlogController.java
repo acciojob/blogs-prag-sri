@@ -24,6 +24,10 @@ public class BlogController {
                                            @RequestParam String title,
                                            @RequestParam String content) {
 
+        BlogRequestDTO blogRequestDTO= new BlogRequestDTO();
+        blogRequestDTO.setTitle(title);
+        blogRequestDTO.setContent(content);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
