@@ -18,6 +18,8 @@ public class Blog {
     @CreationTimestamp
     private Date pubDate;
 
+    private List<Image> list_of_image;
+
     public Blog() {
     }
 
@@ -51,12 +53,20 @@ public class Blog {
         this.pubDate = pubDate;
     }
 
+    public List<Image> getList_of_image() {
+        return list_of_image;
+    }
+
+    public void setList_of_image(List<Image> list_of_image) {
+        this.list_of_image = list_of_image;
+    }
+
     @ManyToOne
     @JoinColumn
     private User user;
 
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
-    private List<Image> imageList;
+    private Image image;
 
 
 }

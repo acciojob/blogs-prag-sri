@@ -1,22 +1,14 @@
-package com.driver.models;
+package com.driver.RequestDTO;
 
-import javax.persistence.*;
-import java.util.Date;
-
-@Entity
-public class Image {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-
+public class ImageUserDTO {
     private String description;
 
     private String dimensions;
 
-    public Image() {
+    public ImageUserDTO() {
     }
 
-    public Image(String description, String dimensions) {
+    public ImageUserDTO(String description, String dimensions) {
         this.description = description;
         this.dimensions = dimensions;
     }
@@ -36,8 +28,4 @@ public class Image {
     public void setDimensions(String dimensions) {
         this.dimensions = dimensions;
     }
-
-    @ManyToOne
-    @JoinColumn
-    private Blog blog;
 }
