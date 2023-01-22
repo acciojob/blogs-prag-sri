@@ -1,24 +1,19 @@
 package com.driver.models;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name="user")
 public class User {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String username;
-
     private String password;
-
     private String firstName;
-
     private String lastName;
-
-    private List<Blog> list_of_blogs;
 
     public User() {
     }
@@ -32,6 +27,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -66,15 +65,14 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Blog> getList_of_blogs() {
-        return list_of_blogs;
+    public List<Blog> getBlogList() {
+        return blogList;
     }
 
-    public void setList_of_blogs(List<Blog> list_of_blogs) {
-        this.list_of_blogs = list_of_blogs;
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Blog blog;
-
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Blog> blogList;
 }

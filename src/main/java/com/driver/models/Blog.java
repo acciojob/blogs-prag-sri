@@ -1,24 +1,22 @@
 package com.driver.models;
 
 import org.hibernate.annotations.CreationTimestamp;
-import java.util.*;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Blog {
+@Table(name="blog")
+public class Blog{
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int Id;
     private String title;
-
     private String content;
-
     @CreationTimestamp
     private Date pubDate;
-
-    private List<Image> list_of_image;
 
     public Blog() {
     }
@@ -27,6 +25,14 @@ public class Blog {
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getTitle() {
@@ -53,20 +59,26 @@ public class Blog {
         this.pubDate = pubDate;
     }
 
-    public List<Image> getList_of_image() {
-        return list_of_image;
+    public User getUser() {
+        return user;
     }
 
-    public void setList_of_image(List<Image> list_of_image) {
-        this.list_of_image = list_of_image;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 
     @ManyToOne
     @JoinColumn
     private User user;
 
-    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
-    private Image image;
-
-
+    @OneToMany(mappedBy = "blog",cascade = CascadeType.ALL)
+    private List<Image> imageList;
 }

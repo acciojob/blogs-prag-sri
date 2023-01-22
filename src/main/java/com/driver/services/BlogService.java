@@ -1,6 +1,5 @@
 package com.driver.services;
 
-import com.driver.RequestDTO.BlogRequestDTO;
 import com.driver.models.Blog;
 import com.driver.models.Image;
 import com.driver.models.User;
@@ -8,8 +7,6 @@ import com.driver.repositories.BlogRepository;
 import com.driver.repositories.ImageRepository;
 import com.driver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,35 +26,31 @@ public class BlogService {
 
     public List<Blog> showBlogs(){
         //find all blogs
-        List<Blog> list= new ArrayList<>();
-        list.add((Blog) blogRepository1.findAll());
-        return list;
-    }
-
-    public Integer getAllBlogs() {
-        int countOfBlogs = 0;
+        List<Blog> blogList= new ArrayList<>();
         for(User user: userRepository1.findAll())
         {
-            countOfBlogs+= user.getList_of_blogs().size();
+            for(Blog blog: user.getBlogList())
+                blogList.add(blog);
         }
-        return countOfBlogs;
+        return blogList;
     }
 
-    public Blog createAndReturnBlog(Integer userId, String title, String content) {
+    public void createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
-        //updating the blog details
-        //Updating the userInformation and changing its blogs
-
         Blog newBlog= new Blog();
+
+        //updating the blog details
+        User user= userRepository1.findById(userId).get();
+        newBlog.setUser(user);
         newBlog.setTitle(title);
         newBlog.setContent(content);
         blogRepository1.save(newBlog);
 
-        User user= userRepository1.findById(userId).get();
-        List<Blog> list= user.getList_of_blogs();
-        list.add(newBlog);
-
-        return newBlog;
+        //Updating the userInformation and changing its blogs
+        List<Blog> blogList= user.getBlogList();
+        blogList.add(newBlog);
+        user.setBlogList(blogList);
+        userRepository1.save(user);
     }
 
     public Blog findBlogById(int blogId){
@@ -67,17 +60,22 @@ public class BlogService {
 
     public void addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog after creating it
-        Image newImage= new Image();
-        newImage.setDescription(description);
-        newImage.setDimensions(dimensions);
+        Blog blog= findBlogById(blogId);
+        Image newImage= imageService1.createAndReturn(blog,description,dimensions);
 
-        Blog blog= blogRepository1.findById(blogId).get();
-        List<Image> list= blog.getList_of_image();
-        list.add(newImage);
+        List<Image> imageList= blog.getImageList();
+        imageList.add(newImage);
+        blog.setImageList(imageList);
+        blogRepository1.save(blog);
+
     }
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
-        blogRepository1.deleteById(blogId);
+        Blog blog= findBlogById(blogId);
+        List<Image> imageList= blog.getImageList();
+        for(Image image: imageList)
+            imageService1.deleteImage(image);
+        blogRepository1.delete(blog);
     }
 }
