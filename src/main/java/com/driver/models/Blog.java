@@ -20,13 +20,13 @@ public class Blog{
     private Date pubDate;
 
     public Blog() {
+        this.imageList= new ArrayList<>();
     }
 
     public Blog(String title, String content, Date pubDate) {
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
-        this.imageList= new ArrayList<>();
     }
 
     public int getId() {
