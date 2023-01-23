@@ -26,12 +26,13 @@ public class BlogService {
 
     public List<Blog> showBlogs(){
         //find all blogs
-        List<Blog> blogList= new ArrayList<>();
-        for(User user: userRepository1.findAll())
-        {
-            blogList.addAll(user.getBlogList());
-        }
-        return blogList;
+        return blogRepository1.findAll();
+//        List<Blog> blogList= new ArrayList<>();     -> this was incorrect!!!
+//        for(User user: userRepository1.findAll())
+//        {
+//            blogList.addAll(user.getBlogList());
+//        }
+//        return blogList;
     }
 
     public void createAndReturnBlog(Integer userId, String title, String content) {

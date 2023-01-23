@@ -80,7 +80,8 @@ public class ImageService {
             i++;
         }
 
-        double result= Math.floor((screenA*screenB)/(imageA*imageB));
+//        double result= Math.floor((screenA*screenB)/(imageA*imageB));     --> this was incorrect!!!
+        double result= Math.floor(screenA/imageA)*Math.floor(screenB/imageB);
         return (int)result;
     }
 }
