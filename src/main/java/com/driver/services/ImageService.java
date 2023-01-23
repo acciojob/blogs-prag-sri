@@ -48,8 +48,8 @@ public class ImageService {
             return 0;
 
         String imageDimensions= image.getDimensions();
-        int imageA= 0;
-        int imageB= 0;
+        double imageA= 0.00;
+        double imageB= 0.00;
         int i=0;
         while(i<imageDimensions.length() && imageDimensions.charAt(i)!='X')
         {
@@ -63,8 +63,8 @@ public class ImageService {
             i++;
         }
 
-        int screenA= 0;
-        int screenB= 0;
+        double screenA= 0.00;
+        double screenB= 0.00;
         i=0;
         while(i<screenDimensions.length() && screenDimensions.charAt(i)!='X')
         {
@@ -78,7 +78,7 @@ public class ImageService {
             i++;
         }
 
-        int result= (screenA*screenB)/(imageA*imageB);
-        return result;
+        double result= Math.floor((screenA*screenB)/(imageA*imageB));
+        return (int)result;
     }
 }

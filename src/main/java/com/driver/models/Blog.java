@@ -3,6 +3,7 @@ package com.driver.models;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class Blog{
         this.title = title;
         this.content = content;
         this.pubDate = pubDate;
+        this.imageList= new ArrayList<>();
     }
 
     public int getId() {

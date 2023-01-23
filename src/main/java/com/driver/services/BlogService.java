@@ -29,8 +29,7 @@ public class BlogService {
         List<Blog> blogList= new ArrayList<>();
         for(User user: userRepository1.findAll())
         {
-            for(Blog blog: user.getBlogList())
-                blogList.add(blog);
+            blogList.addAll(user.getBlogList());
         }
         return blogList;
     }
@@ -75,7 +74,8 @@ public class BlogService {
         Blog blog= findBlogById(blogId);
         List<Image> imageList= blog.getImageList();
         for(Image image: imageList)
-            imageService1.deleteImage(image);
+            image.setBlog(null);
+//            imageService1.deleteImage(image);
         blogRepository1.delete(blog);
     }
 }
